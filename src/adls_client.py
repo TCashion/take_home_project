@@ -25,7 +25,13 @@ def filter_blobs(blob_names, extension):
     Returns:
         A list of blob name strings matching the extension.
     """
-    raise NotImplementedError
+    result = []
+
+    for blob_name in blob_names:
+        if blob_name.endswith(extension):
+            result.append(blob_name)
+
+    return result
 
 
 def main():
