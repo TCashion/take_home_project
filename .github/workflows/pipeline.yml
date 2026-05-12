@@ -7,15 +7,42 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    # from https://docs.astral.sh/ruff/integrations/#github-actions
     steps:
-      - name: Lint placeholder — replace with real steps
-        run: echo "not implemented"
+      - uses: actions/checkout@v4
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff
+      # Update output format to enable automatic inline annotations.
+      - name: Run Ruff
+        run: ruff check --output-format=github .
 
   test:
     runs-on: ubuntu-latest
     needs: lint
     steps:
-      - name: Test placeholder — replace with real steps
-        run: echo "not implemented"
-      - name: Run placeholder — replace with a step that runs adls_client.py
-        run: echo "not implemented"
+      - uses: actions/checkout@v4
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Test with pytest
+        # from: https://docs.github.com/en/actions/tutorials/build-and-test-code/python#testing-with-pytest-and-pytest-cov
+        run: |
+          python -m pytest -v tests/ --junitxml=junit/test-results.xml
+
+      # from: https://github.com/actions/upload-artifact
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: junit/test-results.xml
