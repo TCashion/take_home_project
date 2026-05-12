@@ -12,6 +12,6 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # COPY . . copies everything, including tests, readme, etc. into the production build, which is unnecessary.
-COPY /src /src
+COPY src/ src/
 
 CMD ["python", "src/adls_client.py"]
