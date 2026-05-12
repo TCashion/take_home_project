@@ -1,0 +1,21 @@
+name: CI Pipeline
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lint placeholder — replace with real steps
+        run: echo "not implemented"
+
+  test:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Test placeholder — replace with real steps
+        run: echo "not implemented"
+      - name: Run placeholder — replace with a step that runs adls_client.py
+        run: echo "not implemented"
