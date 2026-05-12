@@ -33,13 +33,6 @@ def filter_blobs(blob_names, extension):
 
     return result
 
-# DO NOT MERGE ME
-def sum_even_numbers(numbers: Iterable[int]) -> int:
-    """Given an iterable of integers, return the sum of all even numbers in the iterable."""
-    return sum(
-        num for num in numbers
-        if num % 2 == 0
-    )
 
 def main():
     container_client = get_container_client()
