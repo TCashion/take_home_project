@@ -38,7 +38,7 @@ jobs:
       - name: Test with pytest
         # from: https://docs.github.com/en/actions/tutorials/build-and-test-code/python#testing-with-pytest-and-pytest-cov
         run: |
-          python -m pytest tests/ --junitxml=junit/test-results.xml
+          python -m pytest -v tests/ --junitxml=junit/test-results.xml
 
       # from: https://github.com/actions/upload-artifact
       - name: Upload artifact
