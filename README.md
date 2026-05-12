@@ -38,3 +38,12 @@ This repository has CI/CD steps configured through Github actions. The current s
 
 - `lint`: an initial `lint` step runs `ruff check` on the codebase to ensure the are no linting errors. If this step fails, the following test step does not run. 
 - `test`: the `test` step runs `python -m pytest -v tests/` and uploads the test results as a downloadable artifact. See each action's output under the `Upload artifact` section to get the respective artifact's download URL.
+
+## Running with Docker
+
+Build and run the image using Docker with the following commands: 
+
+```shell
+docker build -t <tag-name> .
+docker run <tag-name>
+```
