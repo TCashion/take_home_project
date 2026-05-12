@@ -7,9 +7,20 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    # from https://docs.astral.sh/ruff/integrations/#github-actions
     steps:
-      - name: Lint placeholder — replace with real steps
-        run: echo "not implemented"
+      - uses: actions/checkout@v4
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff
+      # Update output format to enable automatic inline annotations.
+      - name: Run Ruff
+        run: ruff check --output-format=github .
 
   test:
     runs-on: ubuntu-latest
