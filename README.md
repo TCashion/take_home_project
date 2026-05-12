@@ -1,6 +1,6 @@
-# take_home_project
+# File extension parser
 
-This is an interview take-home project.
+This repository contains logic that will fetch and parse a public dataset to return blob names that match a given file extension. This work was completed as an interview take-home project.
 
 ## Local development 
 
