@@ -15,7 +15,7 @@ def list_blobs(container_client):
     return [blob.name for blob in container_client.list_blobs()]
 
 
-def filter_blobs(blob_names, extension):
+def filter_blobs(blob_names, extension, prefix=""):
     """Return only the blob names that end with the given extension.
 
     Args:
@@ -27,11 +27,11 @@ def filter_blobs(blob_names, extension):
     """
     result = []
 
-    if not extension: 
+    if not extension:
         return result
 
     for blob_name in blob_names:
-        if blob_name.endswith(extension):
+        if blob_name.startswith(prefix) and blob_name.endswith(extension):
             result.append(blob_name)
 
     return result

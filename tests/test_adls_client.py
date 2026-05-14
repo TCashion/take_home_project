@@ -3,7 +3,7 @@ import pytest
 
 
 @pytest.mark.parametrize(
-    "blob_names, extension, expected",
+    "blob_names, extension, prefix, expected",
     [
         pytest.param(
             [
@@ -14,10 +14,11 @@ import pytest
                 "file5.domain.test.txt",
             ],
             ".txt",
+            "",
             ["file2.txt", "file5.domain.test.txt"],
             id="Find .txt files in a list with mixed matching and non-matching",
         ),
-        pytest.param([], ".txt", [], id="Empty input returns empty result."),
+        pytest.param([], ".txt", "", [], id="Empty input returns empty result."),
         pytest.param(
             [
                 "file1.csv.gz",
@@ -27,6 +28,7 @@ import pytest
                 "file5.domain.test.txt",
             ],
             ".docx",
+            "",
             [],
             id="List with no matches returns empty result",
         ),
@@ -39,8 +41,22 @@ import pytest
                 "file5.domain.test.txt",
             ],
             "",
+            "",
             [],
-            id="Input is empty string"
+            id="Input is empty string",
+        ),
+        pytest.param(
+            [
+                "file1.csv.gz", # nonmatching prefix
+                "file2.txt",
+                "file3.csv.gz", # matching prefix
+                "file4.doc",
+                "file5.domain.test.txt",
+            ],
+            ".csv.gz",
+            "file3",
+            ["file3.csv.gz"],
+            id="Also filters by prefix",
         ),
         pytest.param(
             [
@@ -67,6 +83,7 @@ import pytest
                 "trace_data/vm_cpu_readings/vm_cpu_readings-file-108-of-125.csv.gz",
             ],
             ".csv.gz",
+            "",
             [
                 "trace_data/deployment/deployment.csv.gz",
                 "trace_data/subscriptions/subscriptions.csv.gz",
@@ -86,5 +103,5 @@ import pytest
         ),
     ],
 )
-def test_filter_blobs(blob_names, extension, expected):
-    assert filter_blobs(blob_names, extension) == expected
+def test_filter_blobs(blob_names, extension, prefix, expected):
+    assert filter_blobs(blob_names, extension, prefix) == expected
