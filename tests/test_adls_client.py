@@ -32,6 +32,18 @@ import pytest
         ),
         pytest.param(
             [
+                "file1.csv.gz",
+                "file2.txt",
+                "file3.csv.gz",
+                "file4.doc",
+                "file5.domain.test.txt",
+            ],
+            "",
+            [],
+            id="Input is empty string"
+        ),
+        pytest.param(
+            [
                 "Azure Public Dataset - Trace Analysis.ipynb",
                 "schema.csv",
                 "sosp_data/category.txt",

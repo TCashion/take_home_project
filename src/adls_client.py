@@ -27,6 +27,9 @@ def filter_blobs(blob_names, extension):
     """
     result = []
 
+    if not extension: 
+        return result
+
     for blob_name in blob_names:
         if blob_name.endswith(extension):
             result.append(blob_name)
